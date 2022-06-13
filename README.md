@@ -1,3 +1,9 @@
+![Commit activity](https://img.shields.io/github/commit-activity/w/thibault-cne/wordle-and-solver)
+![Licence](https://img.shields.io/github/license/thibault-cne/wordle-and-solver)
+![Language](https://img.shields.io/badge/Solver-C-brightgreen)
+![Language](https://img.shields.io/badge/Frontend-VueJS-brightgreen)
+![Language](https://img.shields.io/badge/Backend-flask-brightgreen)
+
 # project2-E19 : Wordle and Solver
 
 # Table of Content
