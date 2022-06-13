@@ -1,0 +1,39 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : buttons.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/8
+ */
+
+@mixin btn-slide-left($class, $bg-color, $font-color) {
+  #{$class} {
+    transition: 1s;
+  }
+
+  #{$class}:hover {
+    color: $font-color;
+    box-shadow: inset 100em 0 0 0 $bg-color;
+  }
+}
+
+@mixin link-btn-slide-left($class, $bg-color, $font-color) {
+  #{$class} {
+    transition: 1s;
+  }
+
+  #{$class}:hover {
+    box-shadow: inset 100em 0 0 0 $bg-color;
+  }
+
+  #{$class}:hover a {
+    color: $font-color;
+  }
+}

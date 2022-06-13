@@ -1,0 +1,70 @@
+@use "standards/colors";
+@use "standards/fonts";
+
+// Cells sizes mixin
+@mixin rwd-cell-sizes($cell-size: 7vw, $cell-padding-thickness: 2px) {
+    @media screen and (max-width: 600px) {
+        width: calc(#{$cell-size} - 2 * #{$cell-padding-thickness});
+        height: calc(#{$cell-size} - 2 * #{$cell-padding-thickness});
+        padding: $cell-padding-thickness;
+    }
+    @media only screen and (min-width: 601px) {
+        width: calc(6vw - 2 * #{$cell-padding-thickness});
+        height: calc(6vw - 2 * #{$cell-padding-thickness});
+        padding: $cell-padding-thickness;
+    }
+    @media only screen and (min-width: 768px) {
+        width: calc(5vw - 2 * #{$cell-padding-thickness});
+        height: calc(5vw - 2 * #{$cell-padding-thickness});
+        padding: $cell-padding-thickness;
+    }
+}
+
+.grid {
+    margin-top: 5vh;
+}
+
+.grid table {
+    @include fonts.rwd-font-size();
+    border-spacing: 0;
+    background-color: colors.$grid-color-background;
+    max-width: 100%;
+}
+
+.grid td {
+    @include rwd-cell-sizes();
+    text-align: center;
+    position: relative;
+    color: colors.$font-grid-color;
+    border: 1px solid colors.$grid-border-color;
+    z-index: 0;
+}
+
+.grid td.malplace {
+    background-color: colors.$bad-placed-color;
+    border-radius: 50%;
+}
+
+.grid td.juste {
+    background-color: colors.$well-placed-color;
+}
+
+.grid td.pasla {
+    background-color: colors.$grid-color-background;
+}
+
+.game-message-inexistant {
+    font-size: 24px;
+    text-align: center;
+    padding-bottom: 1em;
+}
+.game-message-win {
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 1em;
+}
+.game-message-perdu {
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 1em;
+}

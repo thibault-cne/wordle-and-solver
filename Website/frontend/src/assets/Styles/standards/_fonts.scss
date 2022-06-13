@@ -1,0 +1,48 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _fonts.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+
+// Fonts colors and family
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+// Font size mixin
+@mixin rwd-font-size($font-size: 15px, $upper-resize: .4vw, $lower-resize: .2vw) {
+  transition: font-size 0.2s ease-in-out;
+  @media only screen and (max-width: 600px) {
+    font-size: calc(#{ $font-size } + #{$upper-resize });
+  }
+  @media only screen and (min-width: 601px) {
+    font-size: calc(#{ $font-size } + #{$lower-resize });
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: calc(#{ $font-size } + #{$upper-resize });
+  }
+}
+
+// Don't display hyperlink text-decoration
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

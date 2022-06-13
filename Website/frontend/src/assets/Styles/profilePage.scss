@@ -1,0 +1,93 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : kelian.moy and louis.chatard
+ * File : profilPage.css
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+
+@use "standards/grid";
+ 
+ .profil { 
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+ }
+ .changePicture {
+   display: flex;
+   flex-direction: column;
+   margin-top: 2em;
+   margin-left: 5em;
+   margin-right: 1em;
+   flex-basis: 25%;
+ }
+ .picture {
+   max-width: 100%;
+   height: auto;
+ }
+ .picture-change {
+   margin-bottom: 10px;
+   display: block;
+   width: auto;
+   height: auto;
+   padding: 10px;
+   outline: none;
+   border: 1px solid #aaa;
+   border-radius: 5px;
+   text-align: center;
+ }
+ img{
+  max-width: 100%;
+  height: auto;
+ }
+ .formulaire {
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+ }
+
+.grid-wrapper {
+  display: grid;
+  @include grid.grid-template($columns-number: 1, $grid-gap: 10px);
+  margin-bottom: 5vh;
+}
+
+.replays-btn {
+  display: flex;
+  height: 6vh;
+  width: 100%;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+  border: none;
+  background-size: 300% 100%;
+  transition: all .4s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-position: 100% 0;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.replays-grid {
+  margin-top: 2vh;
+  margin-bottom: 5vh;
+  animation: growDown--reversed 0.5s ease-in-out forwards;
+}
+
+.replays-grid.active {
+  display: block;
+  animation: growDown 0.5s ease-in-out forwards;
+}

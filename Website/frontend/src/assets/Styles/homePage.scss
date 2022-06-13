@@ -1,0 +1,59 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : homePage.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/4
+ */
+
+@use "standards/position";
+@use "standards/colors";
+@use "standards/fonts";
+@use "standards/buttons";
+
+.title {
+  text-align: center;
+  border-bottom: 1px solid colors.$border-color;
+  @include fonts.rwd-font-size($font-size: 40px);
+}
+
+.nav-link {
+  display: flex;
+  background: transparent;
+  font: {
+    weight: 300;
+  };
+  color: colors.$font-color;
+}
+
+.hover-nav-link {
+  @extend .nav-link
+}
+
+.nav-btn-link {
+  @extend .nav-link;
+  font: {
+    weight: 400;
+  };
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  text-align: center;
+  margin-top: 30px;
+  width: 60%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 8px;
+  background: colors.$btn-bg-colors;
+}
+
+@include buttons.link-btn-slide-left(".btn", colors.$border-color, colors.$hover-font-color);

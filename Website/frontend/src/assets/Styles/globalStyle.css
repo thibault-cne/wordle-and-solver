@@ -1,0 +1,976 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _fonts.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _rwd.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/1
+ */
+* {
+  transition: font-size 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+td,
+th,
+tbody {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+
+[class*=col-] {
+  float: left;
+  padding: 15px;
+}
+
+/* For mobile phones: */
+[class*=col-] {
+  width: 100%;
+}
+
+.desk-navbar {
+  display: none;
+}
+
+.row {
+  display: flex;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-txt {
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {
+    width: 8.33%;
+  }
+
+  .col-s-2 {
+    width: 16.66%;
+  }
+
+  .col-s-3 {
+    width: 25%;
+  }
+
+  .col-s-4 {
+    width: 33.33%;
+  }
+
+  .col-s-5 {
+    width: 41.66%;
+  }
+
+  .col-s-6 {
+    width: 50%;
+  }
+
+  .col-s-7 {
+    width: 58.33%;
+  }
+
+  .col-s-8 {
+    width: 66.66%;
+  }
+
+  .col-s-9 {
+    width: 75%;
+  }
+
+  .col-s-10 {
+    width: 83.33%;
+  }
+
+  .col-s-11 {
+    width: 91.66%;
+  }
+
+  .col-s-12 {
+    width: 100%;
+  }
+
+  .desk-navbar {
+    display: block;
+  }
+
+  .phone-navbar {
+    display: none;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+
+  .col-2 {
+    width: 16.66%;
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-5 {
+    width: 41.66%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 58.33%;
+  }
+
+  .col-8 {
+    width: 66.66%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-10 {
+    width: 83.33%;
+  }
+
+  .col-11 {
+    width: 91.66%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+
+  .desk-navbar {
+    display: block;
+  }
+
+  .phone-navbar {
+    display: none;
+  }
+
+  .menu-icon {
+    display: none;
+  }
+}
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _colors.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+body {
+  background-color: #2b2b2b;
+  color: #ffffff;
+}
+
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : buttons.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/8
+ */
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _popups.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/12
+ */
+.popup-form {
+  position: absolute;
+  opacity: 1;
+  top: -150%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.15);
+  padding: 20px 30px;
+  border-radius: 10px;
+  transition: top 400ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 20ms ease-in-out 0ms;
+}
+
+.active .popup-form {
+  top: 50%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition: top 400ms ease-in-out 0ms, opacity 200ms ease-in-out 0ms, transform 20ms ease-in-out 0ms;
+}
+
+.popup-form .form-title {
+  text-align: center;
+  margin: 10px 0 20px;
+  font-size: 25px;
+}
+
+.popup-form .form-content .form-element {
+  margin: 15px 0;
+}
+
+.popup-form .form-element label {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+.popup-form .form-content input {
+  margin-top: 5px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+}
+
+.popup-form .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.popup-form .submit-button {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #222;
+  color: #f5f5f5;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.submit-button {
+  transition: 1s;
+}
+
+.submit-button:hover {
+  color: #2b2b2b;
+  box-shadow: inset 100em 0 0 0 #ffffff;
+}
+
+.active .under-popup-content {
+  opacity: 0.2;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.grid {
+  margin-top: 5vh;
+}
+
+.grid table {
+  transition: font-size 0.2s ease-in-out;
+  border-spacing: 0;
+  background-color: #0077c7;
+  max-width: 100%;
+}
+@media only screen and (max-width: 600px) {
+  .grid table {
+    font-size: calc(15px + 0.4vw);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .grid table {
+    font-size: calc(15px + 0.2vw);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .grid table {
+    font-size: calc(15px + 0.4vw);
+  }
+}
+
+.grid td {
+  text-align: center;
+  position: relative;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  z-index: 0;
+}
+@media screen and (max-width: 600px) {
+  .grid td {
+    width: calc(7vw - 2 * 2px);
+    height: calc(7vw - 2 * 2px);
+    padding: 2px;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .grid td {
+    width: calc(6vw - 2 * 2px);
+    height: calc(6vw - 2 * 2px);
+    padding: 2px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .grid td {
+    width: calc(5vw - 2 * 2px);
+    height: calc(5vw - 2 * 2px);
+    padding: 2px;
+  }
+}
+
+.grid td.malplace {
+  background-color: #ffbd00;
+  border-radius: 50%;
+}
+
+.grid td.juste {
+  background-color: #e7002a;
+}
+
+.grid td.pasla {
+  background-color: #0077c7;
+}
+
+.game-message-inexistant {
+  font-size: 24px;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.game-message-win {
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.game-message-perdu {
+  font-size: 30px;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _position.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : homePage.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/4
+ */
+.title {
+  text-align: center;
+  border-bottom: 1px solid #ffffff;
+  transition: font-size 0.2s ease-in-out;
+}
+@media only screen and (max-width: 600px) {
+  .title {
+    font-size: calc(40px + 0.4vw);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .title {
+    font-size: calc(40px + 0.2vw);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .title {
+    font-size: calc(40px + 0.4vw);
+  }
+}
+
+.nav-link, .nav-btn-link, .hover-nav-link {
+  display: flex;
+  background: transparent;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.nav-btn-link {
+  font-weight: 400;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  text-align: center;
+  margin-top: 30px;
+  width: 60%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 8px;
+  background: #5A5A5A;
+}
+
+.btn {
+  transition: 1s;
+}
+
+.btn:hover {
+  box-shadow: inset 100em 0 0 0 #ffffff;
+}
+
+.btn:hover a {
+  color: #2b2b2b;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scaleY(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+@keyframes growDown--reversed {
+  0% {
+    transform: scaleY(1);
+    height: 100%;
+    opacity: 1;
+  }
+  20% {
+    transform: scaleY(1.1);
+    height: 110%;
+    opacity: 1;
+  }
+  99.999% {
+    transform: scaleY(0);
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : loginPage.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+.houseImg {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: auto;
+  filter: invert(78%) sepia(0%) saturate(0%) hue-rotate(5deg) brightness(88%) contrast(91%);
+}
+
+.form {
+  margin-top: 10vh;
+}
+
+.form-content {
+  text-align: center;
+}
+
+.form-title {
+  text-align: center;
+  margin: 10px 0 20px;
+  transition: font-size 0.2s ease-in-out;
+  font-weight: 500;
+}
+@media only screen and (max-width: 600px) {
+  .form-title {
+    font-size: calc(40px + 0.4vw);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .form-title {
+    font-size: calc(40px + 0.2vw);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .form-title {
+    font-size: calc(40px + 0.4vw);
+  }
+}
+
+.form-element {
+  margin: 15px 0;
+}
+
+.form-element label {
+  float: left;
+  margin-bottom: 5px;
+}
+
+.form-element input {
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+input:focus {
+  border: 2px solid #3F8BEE;
+}
+
+.submit-btn {
+  margin-top: 5%;
+  width: 70%;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  background-color: #5A5A5A;
+}
+
+.submit-btn {
+  transition: 1s;
+}
+
+.submit-btn:hover {
+  color: #2b2b2b;
+  box-shadow: inset 100em 0 0 0 #ffffff;
+}
+
+.warning {
+  margin-top: 40px;
+  line-height: 2px;
+  font-weight: 400;
+}
+
+.error-msg {
+  color: #c22d2d;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : navBar.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/1
+ */
+.navbar {
+  transition: font-size 0.2s ease-in-out;
+}
+@media only screen and (max-width: 600px) {
+  .navbar {
+    font-size: calc(15px + 0.4vw);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .navbar {
+    font-size: calc(15px + 0.2vw);
+  }
+}
+@media only screen and (min-width: 768px) {
+  .navbar {
+    font-size: calc(15px + 0.4vw);
+  }
+}
+
+.nav-left {
+  float: left;
+}
+
+.nav-right {
+  float: right;
+}
+
+.desk-navbar {
+  border-bottom: 1px solid #ffffff;
+}
+
+.phone-navbar {
+  border-bottom: 1px solid #ffffff;
+}
+
+.nav-item {
+  text-align: center;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.nav-link a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.hover-nav-link a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.hover-nav-link a:hover {
+  text-decoration: underline;
+}
+
+.phone-navbar .nav-content {
+  transition: all 0.2s ease-in-out;
+  line-height: 0;
+  color: transparent;
+}
+
+.phone-navbar.active .nav-content {
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.phone-navbar .nav-item {
+  display: none;
+}
+
+.phone-navbar .dropdown {
+  text-align: center;
+}
+
+.phone-navbar.active .nav-item {
+  display: block;
+}
+
+.nav-brand {
+  text-align: center;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.menu-icon {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.bar-1,
+.bar-2,
+.bar-3 {
+  width: 35px;
+  height: 5px;
+  background-color: #ffffff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.active .bar-1 {
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.active .bar-2 {
+  opacity: 0;
+}
+
+.active .bar-3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.active .menu-icon {
+  transform: translate(0px, 15px);
+}
+
+.dropdown {
+  text-align: left;
+  display: block;
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  perspective: 1000px;
+  z-index: -1;
+}
+
+.dropdown:hover .dropdown-menu-animated {
+  display: block;
+}
+
+.dropdown-menu-animated {
+  display: none;
+}
+
+.dropdown-menu-animated a {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-menu {
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
+}
+
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : kelian.moy and louis.chatard
+ * File : profilPage.css
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+.profil {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.changePicture {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+  margin-left: 5em;
+  margin-right: 1em;
+  flex-basis: 25%;
+}
+
+.picture {
+  max-width: 100%;
+  height: auto;
+}
+
+.picture-change {
+  margin-bottom: 10px;
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  margin-bottom: 5vh;
+}
+
+.replays-btn {
+  display: flex;
+  height: 6vh;
+  width: 100%;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+  border: none;
+  background-size: 300% 100%;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+}
+.replays-btn:hover {
+  background-position: 100% 0;
+}
+.replays-btn:focus {
+  outline: none;
+}
+
+.replays-grid {
+  margin-top: 2vh;
+  margin-bottom: 5vh;
+  animation: growDown--reversed 0.5s ease-in-out forwards;
+}
+
+.replays-grid.active {
+  display: block;
+  animation: growDown 0.5s ease-in-out forwards;
+}
+
+.grid-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.top {
+  width: 100%;
+  height: 10vh;
+  background-color: #072758;
+  border-size: 80%;
+  margin-bottom: 5vh;
+}
+
+.bottom {
+  display: none;
+  width: 100%;
+  height: 30vh;
+  background-color: #bd86c3;
+  border-size: 50%;
+  margin-bottom: 5vh;
+}
+
+.rank {
+  font-size: 30px;
+}
+
+/*# sourceMappingURL=globalStyle.css.map */

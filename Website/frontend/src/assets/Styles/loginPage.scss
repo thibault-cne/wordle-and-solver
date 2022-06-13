@@ -1,0 +1,108 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : loginPage.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+
+@use "standards/position";
+@use "standards/colors";
+@use "standards/fonts";
+@use "standards/buttons";
+@use "standards/animations";
+
+.houseImg {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: auto;
+  filter: invert(78%) sepia(0%) saturate(0%) hue-rotate(5deg) brightness(88%) contrast(91%);
+}
+
+.form {
+  margin-top: 10vh;
+}
+
+.form-content {
+  text-align: center;
+}
+
+.form-title {
+  text-align: center;
+  margin: 10px 0 20px;
+  @include fonts.rwd-font-size($font-size: 40px);
+  font: {
+    weight: 500;
+  };
+}
+
+.form-element {
+    margin: 15px 0;
+}
+
+.form-element label {
+  float: left;
+  margin-bottom: 5px;
+}
+
+.form-element input {
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid colors.$btn-border-color;
+    border-radius: 5px;
+}
+
+input:focus{
+  border: 2px solid colors.$active-borders;
+}
+
+.submit-btn {
+  margin: {
+    top: 5%;
+  };
+  width: 70%;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: colors.$font-color;
+  font: {
+    family: "Poppins", sans-serif;
+    weight: 500;
+    size: 15px;
+  }
+  background: {
+    color: colors.$btn-bg-colors;
+  };
+}
+
+@include buttons.btn-slide-left(".submit-btn", colors.$border-color, colors.$hover-font-color);
+
+.warning {
+  margin-top: 40px;
+  line-height: 2px;
+  font: {
+    weight: 400;
+  }
+}
+
+.error-msg {
+  color: colors.$error-color;
+}
+
+.bounce-enter-active {
+  animation: bounce-in .5s;
+}

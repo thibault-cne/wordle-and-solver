@@ -1,0 +1,43 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : _colors.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+
+// Background
+$bg-color: rgb(43, 43, 43);
+$btn-bg-colors: #5A5A5A;
+$grid-color-background: #0077c7;
+
+// Font
+$font-color: #ffffff;
+$font-grid-color: #ffffff;
+$hover-font-color: rgb(43, 43, 43);
+$error-color: #c22d2d;
+
+// Border color
+$btn-border-color: #aaa;
+$grid-border-color: #ffffff;
+$border-color: #ffffff;
+$active-borders: #3F8BEE;
+
+// Letters color
+$well-placed-color: #e7002a;
+$bad-placed-color: #ffbd00;
+$not-found-color: rgb(112, 112, 112);
+
+
+// Global config
+body {
+  background-color: $bg-color;
+  color: $font-color;
+}

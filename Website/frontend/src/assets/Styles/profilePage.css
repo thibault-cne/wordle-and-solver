@@ -1,0 +1,93 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : louis chatard
+ * File : profilPage.css
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/2
+ */
+.left {
+  padding-left: 15%;
+  width: 30%;
+}
+
+.right {
+  width: 55%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+img {
+  size: 200px;
+}
+
+.picture-change {
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+  height: 70px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.form-content {
+  text-align: center;
+}
+
+.form-title {
+  text-align: center;
+  margin: 10px 0px 20px;
+}
+
+.form-element {
+  margin: 15px 0px;
+}
+
+.form-element label {
+  float: left;
+  margin-bottom: 5px;
+}
+
+.form-element input {
+  margin-bottom: 10px;
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+input:focus {
+  border: 2px solid #3F8BEE;
+}
+
+.submit-btn {
+  margin-top: 5%;
+  width: 70%;
+  height: 35px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  background-color: #5A5A5A;
+}
+
+.submit-btn:hover {
+  border: 1px solid #ffffff;
+}
+
+/*# sourceMappingURL=profilePage.css.map */

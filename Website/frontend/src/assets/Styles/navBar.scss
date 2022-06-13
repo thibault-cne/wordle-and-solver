@@ -1,0 +1,156 @@
+/*!
+ * Copyright (c)
+ * Project : project2-E19
+ *
+ * --
+ *
+ * Author : thibault
+ * File : navBar.scss
+ * Description : *Enter description here*
+ *
+ * --
+ *
+ * Last modification : 2022/4/1
+ */
+
+@use "standards/colors";
+@use "standards/fonts";
+@use "standards/animations";
+
+.navbar {
+  @include fonts.rwd-font-size();
+}
+
+.nav-left {
+  float: left;
+}
+
+.nav-right {
+  float: right;
+}
+
+.desk-navbar {
+  border: {
+    bottom: 1px solid colors.$border-color;
+  }
+}
+
+.phone-navbar {
+  border: {
+    bottom: 1px solid colors.$border-color;
+  }
+}
+
+.nav-item {
+  text-align: center;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.nav-link a {
+  text-decoration: none;
+  cursor: pointer;
+  color: colors.$font-color;
+}
+
+.hover-nav-link a {
+  text-decoration: none;
+  cursor: pointer;
+  color: colors.$font-color;
+}
+
+.hover-nav-link a:hover {
+  text-decoration: underline;
+}
+
+.phone-navbar .nav-content {
+  transition: all 0.2s ease-in-out;
+  line-height: 0;
+  color: transparent;
+}
+
+.phone-navbar.active .nav-content {
+  line-height: 1.5;
+  color: colors.$font-color;
+}
+
+.phone-navbar .nav-item {
+  display: none;
+}
+
+.phone-navbar .dropdown {
+  text-align: center;
+}
+
+.phone-navbar.active .nav-item {
+  display: block;
+}
+
+.nav-brand {
+  text-align: center;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.menu-icon {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.bar-1,
+.bar-2,
+.bar-3 {
+  width: 35px;
+  height: 5px;
+  background-color: colors.$font-color;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.active .bar-1 {
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.active .bar-2 {
+  opacity: 0;
+}
+
+.active .bar-3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.active .menu-icon {
+  transform: translate(0px, 15px);
+}
+
+.dropdown {
+  text-align: left;
+  display: block;
+}
+
+.dropdown_menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  perspective: 1000px;
+  z-index: -1;
+}
+
+.dropdown:hover .dropdown-menu-animated {
+  display: block;
+}
+.dropdown-menu-animated {
+  display: none;
+}
+.dropdown-menu-animated a {
+  display: block;
+  opacity: 1;
+}
+
+.dropdown-menu {
+  animation: growDown 300ms ease-in-out forwards;
+  transform-origin: top center;
+}

@@ -1,0 +1,27 @@
+@use "standards/grid";
+
+.grid-top{
+  display: grid;
+  @include grid.grid-template($columns-number: 3, $grid-gap: 10px);
+}
+
+.top{
+  width: 100%;
+  height: 10vh;
+  background-color: #072758;
+  border-size: 80%;
+  margin-bottom: 5vh;
+}
+
+.bottom{
+  display: none;
+  width: 100%;
+  height: 30vh;
+  background-color: #bd86c3;
+  border-size: 50%;
+  margin-bottom: 5vh;
+}
+
+.rank{
+  font-size: 30px;
+}
