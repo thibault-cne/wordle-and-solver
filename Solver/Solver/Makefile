@@ -81,7 +81,7 @@ Test:		${OBJS_TEST}
 			@echo "\033[3;92mCompilation is completed !${S} 🎉"
 			@mv ./$@ ${B_PATH}/$@.exe
 
-all:		Solver Testeur	Test
+all:		build Solver Testeur Test
 
 clean:
 			@${RM} ${O_PATH}*
@@ -101,6 +101,9 @@ test:		re
 			@echo "${BOLD}${PURPLE}Launching tests${S}${S} 🖥️"
 			@echo ""
 			@${B_PATH}Test.exe
+
+build: 		
+			@mkdir -p $@
 
 .PHONY: all clean fclean re Solver Test Testeur
 
