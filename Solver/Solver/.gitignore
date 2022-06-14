@@ -1,0 +1,9 @@
+# Exclude executable files
+*.exe
+
+# Exclude object files
+./objs
+*.o
+
+# Exclude CLion project files
+.idea/
