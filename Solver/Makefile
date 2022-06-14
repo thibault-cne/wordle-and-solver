@@ -101,7 +101,7 @@ test:		re
 			@echo ""
 			@./Test
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re Solver Test Testeur
 
 S 		=		\033[0m
 BOLD 	= 		\033[1m

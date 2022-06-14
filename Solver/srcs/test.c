@@ -3,23 +3,21 @@
 //
 
 #include "../includes/core_node.h"
-#include "../includes/core.h"
 
 int main() {
-    char **path = get_all_path();
-
-
     char_node *root = create_char_node();
 
-    FILE *file = open_txt(path[5]);
+    add_word_to_char_node(root, "hello");
+    add_word_to_char_node(root, "world");
+    add_word_to_char_node(root, "louis");
+    add_word_to_char_node(root, "laury");
+    add_word_to_char_node(root, "thibo");
 
-    init_dictionary_tree(file, root, 5);
+    cut_words_for_calculation(root, "00101", "hello");
 
-    char_node *copy = copy_char_node(root);
+    printf("%d", count_leaf_char_node(root, _strlen("hello")));
+    display_char_node(root);
 
-    display_char_node(copy);
-
-    free_all_path(path);
     free_char_node(root);
     return 0;
 }

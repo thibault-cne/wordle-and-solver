@@ -57,23 +57,25 @@ void cut_words_for_calculation(char_node *root, char *user_response, char *word)
         assert(_strlen(user_response) == _strlen(word));
 
         int i = 0;
+        int allowed_letters;
         while (user_response[i]) {
+            allowed_letters = calculate_allowed_letter(i, word, user_response);
             if (user_response[i] == '0') {
-                int j = 0;
+                if (allowed_letters > 0) {
+                    cut_words_for_calculation_recursive(_strlen(word), 3, word[i], root, allowed_letters);
+                } else {
+                    int j = 0;
 
-                while (word[j] != '\0') {
-                    if (!((word[j] == word[i] && user_response[j] == '2') || check_letter_with_position_one(word, user_response, word[i]))) {
+                    while (word[j] != '\0') {
                         cut_words_for_calculation_recursive(j + 1, 0, word[i], root, 0);
+                        j++;
                     }
-
-                    j++;
                 }
             } else if (user_response[i] == '1' && (i + 1) < _strlen(word)) {
                 cut_words_for_calculation_recursive(i + 1, 0, word[i], root, 0);
-                cut_words_for_calculation_recursive(_strlen(word), 3, word[i], root, calculate_allowed_letter(i, word, user_response));
-            }
-            else {
-                cut_words_for_calculation_recursive(i + 1, user_response[i] - 48, word[i], root, 0);
+                cut_words_for_calculation_recursive(_strlen(word), 3, word[i], root, allowed_letters);
+            } else {
+                cut_words_for_calculation_recursive(i + 1, user_response[i] - 48, word[i], root, allowed_letters);
             }
             i++;
         }
@@ -125,23 +127,25 @@ void cut_char_node(char_node *root, char *user_response, char *word) {
     assert(_strlen(user_response) == _strlen(word));
 
     int i = 0;
+    int allowed_letters;
     while (user_response[i]) {
+        allowed_letters = calculate_allowed_letter(i, word, user_response);
         if (user_response[i] == '0') {
-            int j = 0;
+            if (allowed_letters > 0) {
+                cut_char_node_recursive(_strlen(word), 3, word[i], root, allowed_letters);
+            } else {
+                int j = 0;
 
-            while (word[j] != '\0') {
-                if (!((word[j] == word[i] && user_response[j] == '2') || check_letter_with_position_one(word, user_response, word[i]))) {
+                while (word[j] != '\0') {
                     cut_char_node_recursive(j + 1, 0, word[i], root, 0);
+                    j++;
                 }
-
-                j++;
             }
         } else if (user_response[i] == '1' && (i + 1) < _strlen(word)) {
             cut_char_node_recursive(i + 1, 0, word[i], root, 0);
-            cut_char_node_recursive(_strlen(word), 3, word[i], root, calculate_allowed_letter(i, word, user_response));
-        }
-        else {
-            cut_char_node_recursive(i + 1, user_response[i] - 48, word[i], root, 0);
+            cut_char_node_recursive(_strlen(word), 3, word[i], root, allowed_letters);
+        } else {
+            cut_char_node_recursive(i + 1, user_response[i] - 48, word[i], root, allowed_letters);
         }
         i++;
     }

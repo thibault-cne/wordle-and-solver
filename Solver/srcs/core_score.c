@@ -31,9 +31,7 @@ double calculate_entropy(char_node *root, char *word, linked_list_template *temp
             restore_char_node(root);
             current_template = current_template->next;
         }
-
-        printf("Calculating score for word : %s\n", word);
-        printf("Entropy : %f\n", entropy);
+        
         return entropy;
     }
 }
