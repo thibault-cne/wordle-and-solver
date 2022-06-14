@@ -17,4 +17,8 @@ int _asprintf (char **buf, const char *fmt, ...);
 int _count_char(char *str, char c);
 int *_count_all_char(char *str);
 
+char *_int_to_string(int *value, int size);
+
+int calculate_allowed_letter(int index, char *word, char *template);
+
 #endif //SOLVER_CORE_CHAR_H

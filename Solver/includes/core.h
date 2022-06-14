@@ -16,5 +16,6 @@ FILE* open_txt(char* path);
 char* word_length();
 char *get_best_opening(int word_length);
 bool check_template_validity(char *template);
+bool check_template(char *user_response, int word_length);
 
 #endif //SOLVER_CORE_H

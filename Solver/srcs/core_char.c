@@ -88,3 +88,36 @@ int *_count_all_char(char *str) {
 
     return count;
 }
+
+
+char *_int_to_string(int *value, int size) {
+    assert(value != NULL);
+
+    char *str = malloc(sizeof(char) * (size + 1));
+    str[size] = '\0';
+
+    int i = 0;
+    while (i < size) {
+        str[i] = value[i] + '0';
+        i++;
+    }
+
+    return str;
+}
+
+
+int calculate_allowed_letter(int index, char *word, char *template) {
+    assert(word != NULL && template != NULL);
+    assert(index >= 0 && index < _strlen(word));
+
+    int i = 0;
+    int count = 0;
+    while (template[i]) {
+        if (template[i] != '0' && word[i] == word[index]) {
+            count ++;
+        }
+        i++;
+    }
+
+    return count;
+}

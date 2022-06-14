@@ -1,34 +1,24 @@
-// Copyright (c)
-// Project : project2-E19
 //
-// --
-//
-// Author : louiscleriot
-// File : testeur.h
-// Description : *Enter description here*
-//
-// --
-//
-// Last modification : 2022/6/5
-
-//
-// Created by louiscleriot on 05/06/2022.
+// Created by Thibault Cheneviere on 06/06/2022.
 //
 
-#ifndef PROJECT2_E19_TESTEUR_H
-#define PROJECT2_E19_TESTEUR_H
+#ifndef SOLVER_TESTEUR_H
+#define SOLVER_TESTEUR_H
 
-#include "../includes/core.h"
-#include "../includes/core_node.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-int hash_function(char c);
-void wordle(char *_template, char *try,char *sol);
-char *choose_word(int word_length,int current_line, int total_lines);
-int get_number_of_line(FILE *file, int MAX_WORD_SIZE);
+#include "core_char.h"
+#include "core.h"
+#include "core_node.h"
 
+typedef struct best_word_result {
+    char *word;
+    double avg_turn;
+} best_word_result;
 
+void calculate_wordle_template(char *_template, char *good_word, char *_try);
+int *init_nb_turn_result(int size);
+double calculate_average(int *nb_turn_result);
+double calculate_average_with_specific_best_word(char *best_word_value);
 
-
-#endif //PROJECT2_E19_TESTEUR_H
+#endif //SOLVER_TESTEUR_H

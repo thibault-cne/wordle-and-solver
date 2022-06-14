@@ -94,11 +94,31 @@ bool check_template_validity(char *template) {
     int i = 0;
 
     while (template[i] != '\0') {
-        if (template[i] != '0' || template[i] != '1' || template[i] != '2') {
+        if (template[i] != '0' && template[i] != '1' && template[i] != '2') {
             return false;
         }
         i++;
     }
 
     return true;
+}
+
+
+bool check_template(char *user_response, int word_length) {
+    if (user_response[0] == '-' && user_response[1] == '1') {
+        printf("You exited program\n");
+        return true;
+    }
+
+    if (_strlen(user_response) != word_length) {
+        printf("You entered a wrong template : length error.\n");
+        return true;
+    }
+
+    if (!check_template_validity(user_response)) {
+        printf("You entered a wrong template : invalid characters.\n");
+        return true;
+    }
+
+    return false;
 }

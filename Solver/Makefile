@@ -1,23 +1,33 @@
-FILES_MAIN	=	main_thibault.c				\
-				template_list.c				\
-				core_template.c				\
-				core_node.c					\
-				char_node.c					\
-				core_score.c				\
-				linked_list_node.c			\
-				core_char.c					\
+FILES_MAIN	=	main.c							\
+				template_list.c					\
+				core_template.c					\
+				core_node.c						\
+				char_node.c						\
+				core_score.c					\
+				double_linked_list_node.c		\
+				core_char.c						\
 				core.c
 
-FILES_TEST	=	testeur_thibault.c			\
-				template_list.c				\
-				core_template.c				\
-				core_node.c					\
-				char_node.c					\
-				core_score.c				\
-				linked_list_node.c			\
-				core_char.c					\
-				core.c
+FILES_TESTEUR	=	testeur.c						\
+					template_list.c					\
+					core_template.c					\
+					core_node.c						\
+					char_node.c						\
+					core_score.c					\
+					double_linked_list_node.c		\
+					core_char.c						\
+					core.c
 
+
+FILES_TEST		=	test.c							\
+					template_list.c					\
+                    core_template.c					\
+                    core_node.c						\
+      				char_node.c						\
+                    core_score.c					\
+                    double_linked_list_node.c		\
+                    core_char.c						\
+                    core.c
 
 
 S_PATH	=	srcs/
@@ -27,10 +37,14 @@ I_PATH	=	includes/
 SRCS_MAIN	=	${addprefix ${S_PATH}, ${FILES_MAIN}}
 OBJS_MAIN	=	${addprefix ${O_PATH}, ${FILES_MAIN:.c=.o}}
 
+SRCS_TESTEUR	=	${addprefix ${S_PATH}, ${FILES_TESTEUR}}
+OBJS_TESTEUR	=	${addprefix ${O_PATH}, ${FILES_TESTEUR:.c=.o}}
+
 SRCS_TEST	=	${addprefix ${S_PATH}, ${FILES_TEST}}
 OBJS_TEST	=	${addprefix ${O_PATH}, ${FILES_TEST:.c=.o}}
 
 BINARIES	=	Solver	\
+				Testeur	\
 				Test
 
 CC		=	clang
@@ -52,6 +66,13 @@ Solver:		${OBJS_MAIN}
 			@echo ""
 			@echo "\033[3;92mCompilation is completed !${S} 🎉"
 
+Testeur:	${OBJS_TESTEUR}
+			@${CC} ${OBJS_TESTEUR} ${CFLAGS} -o $@ -lreadline -I ${I_PATH}
+			@echo ""
+			@echo "${BOLD}${PURPLE}Building${S}${S} ${IGREY}$@${S} 🖥️"
+			@echo ""
+			@echo "\033[3;92mCompilation is completed !${S} 🎉"
+
 Test:		${OBJS_TEST}
 			@${CC} ${OBJS_TEST} ${CFLAGS} -o $@ -lreadline -I ${I_PATH}
 			@echo ""
@@ -59,7 +80,7 @@ Test:		${OBJS_TEST}
 			@echo ""
 			@echo "\033[3;92mCompilation is completed !${S} 🎉"
 
-all:		Solver Test
+all:		Solver Testeur	Test
 
 clean:
 			@${RM} ${O_PATH}

@@ -6,43 +6,35 @@
 
 // Functions to calculate the score of a word
 // Core functions for the solver
-best_word *calculate_best_word(char_node *dictionary, int size) {
-    best_word *best = malloc(sizeof(best_word));
-    best->word = malloc(sizeof(char) * (size + 1));
+void calculate_best_word(char_node *dictionary, int size, linked_list_template *template_list, best_word *best) {
     best->score = -1;
-
-    char_node *dictionary_copy = copy_char_node(dictionary);
 
     char *path = malloc(sizeof(char) * (size + 1));
     path[size] = '\0';
-    linked_list_node *node_next = dictionary->next;
+    double_linked_list_node *node_next = dictionary->next;
     if (node_next != NULL) {
-        linked_list_template *template_list = init_linked_list_template(size);
-
-        linked_list_node_element *current_element = node_next->value;
+        double_linked_list_node_element *current_element = node_next->value;
         while (current_element != NULL) {
-            calculate_best_word_recursive(dictionary_copy, current_element->value, best, path, 0, template_list);
+            calculate_best_word_recursive(dictionary, current_element->value, best, path, 0, template_list);
             current_element = current_element->next;
         }
 
-        free_linked_list_template(template_list);
     }
 
     free(path);
-    free_char_node(dictionary_copy);
-    return best;
 }
 
 
 void calculate_best_word_recursive(char_node *root, char_node *node, best_word *best, char *path, int depth, linked_list_template *list_template) {
     if (node->next->value == NULL) {
-        if (depth != _strlen(path)) {
-            return;
-        }
+        assert(depth == _strlen(path) - 1);
+        path[depth++] = node->value;
+        path[depth] = '\0';
+
         char *word = malloc(sizeof(char) * (depth + 1));
         _strcpy(word, path);
 
-        double word_score = calculate_entropy(root, word, node, list_template);
+        double word_score = calculate_entropy(root, word, list_template);
         if (word_score > best->score) {
             _strcpy(best->word, word);
             best->score = word_score;
@@ -51,7 +43,7 @@ void calculate_best_word_recursive(char_node *root, char_node *node, best_word *
         return;
     } else {
         path[depth] = node->value;
-        linked_list_node_element *current_element = node->next->value;
+        double_linked_list_node_element *current_element = node->next->value;
         while (current_element != NULL) {
             calculate_best_word_recursive(root, current_element->value, best, path, depth + 1, list_template);
             current_element = current_element->next;
@@ -61,81 +53,68 @@ void calculate_best_word_recursive(char_node *root, char_node *node, best_word *
 
 
 // Cut functions
-void cut_words_for_calculation(int depth, int template_temper, char word_temper, char_node *dictionary, linked_list_node *node_list) {
-    if (depth == 0) {
-        int word_temper_in_path;
-        switch (template_temper) {
-            case 0:
-                if (word_temper == dictionary->value) {
-                    cut_and_save_char_node(dictionary, node_list);
+void cut_words_for_calculation(char_node *root, char *user_response, char *word) {
+        assert(_strlen(user_response) == _strlen(word));
+
+        int i = 0;
+        while (user_response[i]) {
+            if (user_response[i] == '0') {
+                int j = 0;
+
+                while (word[j] != '\0') {
+                    if (!((word[j] == word[i] && user_response[j] == '2') || check_letter_with_position_one(word, user_response, word[i]))) {
+                        cut_words_for_calculation_recursive(j + 1, 0, word[i], root, 0);
+                    }
+
+                    j++;
                 }
-                break;
-            case 1:
-                word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper) + is_char_in_children_char_node(dictionary, word_temper);
-                if (word_temper == dictionary->value || word_temper_in_path == 0) {
-                    cut_and_save_char_node(dictionary, node_list);
-                }
-                break;
-            case 2:
-                if (word_temper != dictionary->value) {
-                    cut_and_save_char_node(dictionary, node_list);
-                }
-                break;
+            } else if (user_response[i] == '1' && (i + 1) < _strlen(word)) {
+                cut_words_for_calculation_recursive(i + 1, 0, word[i], root, 0);
+                cut_words_for_calculation_recursive(_strlen(word), 3, word[i], root, calculate_allowed_letter(i, word, user_response));
+            }
+            else {
+                cut_words_for_calculation_recursive(i + 1, user_response[i] - 48, word[i], root, 0);
+            }
+            i++;
         }
-        return;
-    } else {
-        linked_list_node *current_node_leaf = dictionary->next;
-        if (current_node_leaf == NULL) {
-            return;
-        }
-        linked_list_node_element *current_element = current_node_leaf->value;
-        while (current_element != NULL && current_element->value != NULL) {
-            cut_words_for_calculation(depth - 1, template_temper, word_temper, current_element->value, node_list);
-            current_element = current_element->next;
-        }
-    }
 }
 
 
-void cut_words_for_steps(int depth, int template_temper, char word_temper, char_node *dictionary) {
+void cut_words_for_calculation_recursive(int depth, int template_temper, char word_temper, char_node *dictionary, int allowed_letters) {
     if (depth == 0) {
         int word_temper_in_path;
         switch (template_temper) {
             case 0:
                 if (word_temper == dictionary->value) {
-                    remove_element_from_char_node(dictionary);
-                    free_char_node(dictionary);
+                    dictionary->is_cuted = true;
                 }
                 break;
             case 1:
                 word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper);
                 if (word_temper == dictionary->value || word_temper_in_path == 0) {
-                    remove_element_from_char_node(dictionary);
-                    free_char_node(dictionary);
+                    dictionary->is_cuted = true;
                 }
                 break;
             case 2:
                 if (word_temper != dictionary->value) {
-                    remove_element_from_char_node(dictionary);
-                    free_char_node(dictionary);
+                    dictionary->is_cuted = true;
                 }
                 break;
-           case 3:
-               word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper);
-                if (word_temper_in_path == 0) {
-                    remove_element_from_char_node(dictionary);
-                    free_char_node(dictionary);
+            case 3:
+                word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper);
+                if (word_temper_in_path != allowed_letters) {
+                    dictionary->is_cuted = true;
                 }
         }
         return;
     } else {
-        linked_list_node *current_node_leaf = dictionary->next;
+        double_linked_list_node *current_node_leaf = dictionary->next;
         if (current_node_leaf == NULL) {
             return;
         }
-        linked_list_node_element *current_element = current_node_leaf->value;
+        double_linked_list_node_element *current_element = current_node_leaf->value;
         while (current_element != NULL && current_element->value != NULL) {
-            cut_words_for_steps(depth - 1, template_temper, word_temper, current_element->value);
+            cut_words_for_calculation_recursive(depth - 1, template_temper, word_temper, current_element->value, allowed_letters);
             current_element = current_element->next;
         }
     }
@@ -152,19 +131,66 @@ void cut_char_node(char_node *root, char *user_response, char *word) {
 
             while (word[j] != '\0') {
                 if (!((word[j] == word[i] && user_response[j] == '2') || check_letter_with_position_one(word, user_response, word[i]))) {
-                    cut_words_for_steps(j + 1, 0, word[i], root);
+                    cut_char_node_recursive(j + 1, 0, word[i], root, 0);
                 }
 
                 j++;
             }
         } else if (user_response[i] == '1' && (i + 1) < _strlen(word)) {
-            cut_words_for_steps(i + 1, 0, word[i], root);
-            cut_words_for_steps(_strlen(word), 3, word[i], root);
+            cut_char_node_recursive(i + 1, 0, word[i], root, 0);
+            cut_char_node_recursive(_strlen(word), 3, word[i], root, calculate_allowed_letter(i, word, user_response));
         }
         else {
-            cut_words_for_steps(i + 1, user_response[i] - 48, word[i], root);
+            cut_char_node_recursive(i + 1, user_response[i] - 48, word[i], root, 0);
         }
         i++;
+    }
+
+    clean_tree(root, _strlen(word));
+}
+
+
+void cut_char_node_recursive(int depth, int template_temper, char word_temper, char_node *dictionary, int allowed_letters) {
+    assert(dictionary != NULL);
+
+    if (depth == 0) {
+        int word_temper_in_path;
+        switch (template_temper) {
+            case 0:
+                if (word_temper == dictionary->value) {
+                    remove_element_from_char_node(dictionary);
+                }
+                break;
+            case 1:
+                word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper);
+                if (word_temper == dictionary->value || word_temper_in_path == 0) {
+                    remove_element_from_char_node(dictionary);
+                }
+                break;
+            case 2:
+                if (word_temper != dictionary->value) {
+                    remove_element_from_char_node(dictionary);
+                }
+                break;
+            case 3:
+                word_temper_in_path = is_char_in_parent_char_node(dictionary, word_temper);
+                if (word_temper_in_path != allowed_letters) {
+                    remove_element_from_char_node(dictionary);
+                }
+        }
+        return;
+    } else {
+        double_linked_list_node *current_node_leaf = dictionary->next;
+        if (current_node_leaf == NULL) {
+            return;
+        }
+        double_linked_list_node_element *current_element = current_node_leaf->value;
+        double_linked_list_node_element *temp_next;
+        while (current_element != NULL && current_element->value != NULL) {
+            temp_next = current_element->next;
+            cut_char_node_recursive(depth - 1, template_temper, word_temper, current_element->value, allowed_letters);
+            current_element = temp_next;
+        }
     }
 }
 

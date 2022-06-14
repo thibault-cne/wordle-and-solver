@@ -143,7 +143,6 @@ carte
 selon
 guere
 jaune
-False
 court
 large
 moyen

@@ -8,15 +8,17 @@
 char_node *create_char_node() {
     char_node *node = malloc(sizeof(char_node));
     node->value = '&';
-    node->next = create_linked_list_node();
     node->parent = NULL;
+    node->is_cuted = false;
+    node->next = create_double_linked_list_node();
+
     return node;
 }
 
 
 void free_char_node(char_node *node) {
     if (node->next != NULL) {
-        free_linked_list_node(node->next);
+        free_double_linked_list_node(node->next);
     }
 
     free(node);
@@ -24,45 +26,36 @@ void free_char_node(char_node *node) {
 
 
 // Core functions to manipulate the linked list
-char_node *add_element_to_char_node(char_node *node, char value) {
+void add_element_to_char_node(char_node *node, char value) {
     char_node *element = create_char_node();
     element->value = value;
     element->parent = node;
-    add_element_to_linked_list(node->next, element);
 
-    return element;
+    add_element_to_double_linked_list_node(node->next, element);
 }
 
 
-void add_char_node_to_char_node(char_node *node, char_node *element) {
+void remove_element_from_char_node(char_node *element) {
     if (element->parent != NULL) {
-        add_element_to_linked_list(element->parent->next, element);
-    } else {
-        element->parent = node;
-        add_element_to_linked_list(node->next, element);
+        remove_element_from_double_linked_list_node(element->parent->next, element);
     }
 }
 
 
-linked_list_node_element *remove_element_from_char_node(char_node *element) {
-    linked_list_node_element *removed_element;
-    if (element->parent != NULL) {
-        removed_element = remove_element_from_linked_list(element->parent->next, element);
-    } else {
-        return NULL;
-    }
-    return removed_element;
-}
-
-
-int count_leaf_char_node(char_node *node) {
-    if (node->next->value == NULL) {
-        return 1;
+int count_leaf_char_node(char_node *node, int height) {
+    if (node->next->value == NULL && height == 0) {
+        if (node->is_cuted) {
+            return 0;
+        } else {
+            return 1;
+        }
     } else {
         int count = 0;
-        linked_list_node_element *element = node->next->value;
-        while (element != NULL) {
-            count += count_leaf_char_node(element->value);
+        double_linked_list_node_element *element = node->next->value;
+        while (element != NULL && element->value != NULL) {
+            if (element->value->is_cuted == false) {
+                count += count_leaf_char_node(element->value, height - 1);
+            }
             element = element->next;
         }
         return count;
@@ -75,7 +68,7 @@ int char_node_height(char_node *node) {
         return 0;
     } else {
         int max_height = 0;
-        linked_list_node_element *current_element = node->next->value;
+        double_linked_list_node_element *current_element = node->next->value;
         while (current_element != NULL && current_element->value != NULL) {
             int height = char_node_height(current_element->value);
             if (height > max_height) {
@@ -89,63 +82,88 @@ int char_node_height(char_node *node) {
 
 
 // Extended functions to manipulate the char node
-void cut_and_save_char_node(char_node *element, linked_list_node *list) {
-    if (!element->value) {
+void clean_tree(char_node *root, int size) {
+    if (root->next->value == NULL) {
         return;
-    }
-    linked_list_node_element *removed_element = remove_element_from_char_node(element);
-    if (removed_element != NULL) {
-        add_element_to_linked_list(list, removed_element->value);
     } else {
-        (void) list;
-        printf("Error: element not found in the linked list\n");
+        int i = size - 1;
+
+        while (i > 0) {
+            double_linked_list_node_element *element = root->next->value;
+            double_linked_list_node_element *temp_next;
+            while (element != NULL && element->value != NULL) {
+                temp_next = element->next;
+                clean_tree_recursive(element->value, i - 1);
+                element = temp_next;
+            }
+            i--;
+        }
     }
 }
 
 
-void restore_char_node(char_node *node, linked_list_node *list) {
-    if (list->value == NULL) {
-        return;
+void clean_tree_recursive(char_node *root, int depth) {
+    if (depth == 0) {
+        if (is_empty_double_linked_list_node(root->next)) {
+            remove_element_from_char_node(root);
+        }
     } else {
-        linked_list_node_element *current_element = list->value;
-        while (current_element != NULL) {
-            add_char_node_to_char_node(node, current_element->value);
-            current_element = current_element->next;
+        double_linked_list_node_element *element = root->next->value;
+        double_linked_list_node_element *temp_next;
+        while (element != NULL && element->value != NULL) {
+            temp_next = element->next;
+            clean_tree_recursive(element->value, depth - 1);
+            element = temp_next;
+        }
+    }
+}
+
+
+void restore_char_node(char_node *node) {
+    if (node->is_cuted) {
+        node->is_cuted = false;
+    }
+
+    if (node->next->value != NULL) {
+        double_linked_list_node_element *element = node->next->value;
+        while (element != NULL) {
+            restore_char_node(element->value);
+            element = element->next;
         }
     }
 }
 
 
 char_node *get_son_char_node(char_node *dictionary, char letter) {
-    linked_list_node_element *current_node_leaf = dictionary->next->value;
+    double_linked_list_node_element *current_node_leaf = dictionary->next->value;
 
     while (current_node_leaf != NULL && current_node_leaf->value != NULL) {
         if (current_node_leaf->value->value == letter) {
             return current_node_leaf->value;
-        } else {
-            current_node_leaf = current_node_leaf->next;
         }
+
+        current_node_leaf = current_node_leaf->next;
     }
     return NULL;
 }
 
 
 void add_word_to_char_node(char_node *dictionary, char* word) {
-    char_node *current_node = dictionary;
-    char_node *current_son;
-    int i = 0;
-    while (word[i] != '\0') {
-        current_son = get_son_char_node(current_node, word[i]);
-        if (current_son == NULL) {
-            current_node = add_element_to_char_node(current_node, word[i]);
-        } else {
-            current_node = current_son;
+    assert(dictionary != NULL && word != NULL);
+
+    char_node *currentNode = dictionary;
+
+    if (word[0] != '\0') {
+        char_node *node = get_son_char_node(currentNode, word[0]);
+        if (node == NULL) {
+            node = create_char_node();
+            node->value = word[0];
+            node->parent = currentNode;
+            add_element_to_double_linked_list_node(currentNode->next, node);
         }
-        i++;
-    }
-    current_son = get_son_char_node(current_node, word[i]);
-    if (current_son == NULL) {
-        add_element_to_char_node(current_node, word[i]);
+
+        node = get_son_char_node(currentNode, word[0]);
+        add_word_to_char_node(node, word + 1);
     }
 }
 
@@ -154,7 +172,7 @@ char_node *copy_char_node(char_node *node) {
     char_node *copy = create_char_node();
 
     char *path = malloc(sizeof(char) * 100);
-    linked_list_node_element *current_element = node->next->value;
+    double_linked_list_node_element *current_element = node->next->value;
     while (current_element != NULL) {
         copy_char_node_recursive(copy, current_element->value, path, 0);
         current_element = current_element->next;
@@ -167,12 +185,13 @@ char_node *copy_char_node(char_node *node) {
 
 void copy_char_node_recursive(char_node *copy, char_node *node, char *path, int depth) {
     if (node->next->value == NULL) {
+        path[depth++] = node->value;
         path[depth] = '\0';
         add_word_to_char_node(copy, path);
         return;
     } else {
         path[depth] = node->value;
-        linked_list_node_element *current_element = node->next->value;
+        double_linked_list_node_element *current_element = node->next->value;
         while (current_element != NULL) {
             copy_char_node_recursive(copy, current_element->value, path, depth + 1);
             current_element = current_element->next;
@@ -182,34 +201,14 @@ void copy_char_node_recursive(char_node *copy, char_node *node, char *path, int 
 
 
 int is_char_in_parent_char_node(char_node *node, char letter) {
-    if (node->value == '&') {
+    if (node == NULL || node->value == '&') {
         return 0;
     } else {
         if (node->value == letter) {
-            return 1;
+            return 1 + is_char_in_parent_char_node(node->parent, letter);
         } else {
             return is_char_in_parent_char_node(node->parent, letter);
         }
-    }
-}
-
-
-int is_char_in_children_char_node(char_node *node, char letter) {
-    if (node->next->value == NULL) {
-        return 0;
-    } else {
-        linked_list_node_element *current_element = node->next->value;
-        while (current_element != NULL) {
-            if (current_element->value->value == letter) {
-                return 1;
-            } else {
-                if (is_char_in_children_char_node(current_element->value, letter)) {
-                    return 1;
-                }
-            }
-            current_element = current_element->next;
-        }
-        return 0;
     }
 }
 
@@ -218,7 +217,7 @@ int is_char_in_children_char_node(char_node *node, char letter) {
 void display_char_node(char_node *node) {
     char *path = malloc(sizeof(char) * 100);
 
-    linked_list_node_element *current_element = node->next->value;
+    double_linked_list_node_element *current_element = node->next->value;
     while (current_element != NULL && current_element->value != NULL) {
         display_char_node_path(current_element->value, path, 0);
         current_element = current_element->next;
@@ -227,7 +226,10 @@ void display_char_node(char_node *node) {
 
 
 void display_char_node_path(char_node *node, char *path, int depth) {
-    if (node->next->value == NULL) {
+    if (is_empty_double_linked_list_node(node->next)) {
+        path[depth++] = node->value;
+        path[depth] = '\0';
+
         int i = 0;
         while (i < depth) {
             printf("%c", path[i]);
@@ -237,9 +239,11 @@ void display_char_node_path(char_node *node, char *path, int depth) {
         return;
     } else {
         path[depth] = node->value;
-        linked_list_node_element *current_element = node->next->value;
+        double_linked_list_node_element *current_element = node->next->value;
         while (current_element != NULL && current_element->value != NULL) {
-            display_char_node_path(current_element->value, path, depth + 1);
+            if (current_element->value->is_cuted == false) {
+                display_char_node_path(current_element->value, path, depth + 1);
+            }
             current_element = current_element->next;
         }
     }

@@ -14,6 +14,6 @@
 #include "core_template.h"
 #include "core_char.h"
 
-double calculate_entropy(char_node *root, char *word, char_node *dictionary, linked_list_template *template_list);
+double calculate_entropy(char_node *root, char *word, linked_list_template *template_list);
 
 #endif //SOLVER_CORE_SCORE_H

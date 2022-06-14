@@ -14,8 +14,11 @@ linked_list_template *create_linked_list_template(int size) {
 
 
 void free_linked_list_template(linked_list_template *list) {
-    if (list->value != NULL) {
-        free_linked_list_template_element(list->value);
+    linked_list_template_element *element = list->value;
+    while (element != NULL) {
+        linked_list_template_element *next = element->next;
+        free_linked_list_template_element(element);
+        element = next;
     }
 
     free(list);
@@ -31,14 +34,7 @@ linked_list_template_element *create_linked_list_template_element(int size) {
 
 
 void free_linked_list_template_element(linked_list_template_element *element) {
-    if (element->next != NULL) {
-        free_linked_list_template_element(element->next);
-    }
-
-    if (element->value != NULL) {
-        free(element->value);
-    }
-
+    free(element->value);
     free(element);
 }
 

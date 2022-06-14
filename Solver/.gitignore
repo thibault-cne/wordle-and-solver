@@ -1,10 +1,11 @@
 # Exclude executable files
 Solver
 Test
+Testeur
 
 # Exclude object files
 ./objs
 *.o
 
 # Exclude CLion project files
-.idea
+.idea/
