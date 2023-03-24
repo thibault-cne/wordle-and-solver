@@ -93,9 +93,5 @@ $ make re
 $ ./solver
 ```
 
-
-# Warnings
-Has I continue to maintain the website and the solver, both arent finished in their development.
-
 # Issues
 Their is still some issues especially on the solver part. I have problems on the way I cut the tree for calculation and for steps. If you have tips or any kind of advice, your welcome.
